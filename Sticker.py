@@ -1,6 +1,11 @@
+print("loading")
+import os
+os.system("python installlib.py")
 import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtGui import QMovie
+import math
+print("\x1B[H\x1B[J")
 
 class Sticker(QtWidgets.QMainWindow):
     def __init__(self, img_path, xy, size=1.0, on_top=False):
@@ -58,7 +63,7 @@ class Sticker(QtWidgets.QMainWindow):
             self.timer.start()
         else:
             self.timer.timeout.connect(self.__walkHandler)
-            self.timer.start(1000 / self.speed)
+            self.timer.start(self.speed)
 
     def __walkHandler(self):
         if self.xy[0] >= self.to_xy[0]:
@@ -110,7 +115,10 @@ class Sticker(QtWidgets.QMainWindow):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-
-    s = Sticker('gif/left.gif', xy=[-80, 200], on_top=False)
-
+    
+    s7 = Sticker('img/TCO.png', xy=[500, 870], size=0.5, on_top=True)
+    s7.walk_diff(from_xy_diff=[-350, 0], to_xy_diff=[1300, 0], speed=5)
+    
+    s8 = Sticker('img/TSC.png', xy=[700, 900], size=0.3, on_top=True)
+    s8.walk_diff(from_xy_diff=[-500, 0], to_xy_diff=[1150, 0], speed=5)
     sys.exit(app.exec_())
